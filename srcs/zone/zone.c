@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:46:13 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/15 15:55:18 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/15 17:01:24 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	delete_zone(t_zone *zone) {
 		start = start->next;
 	if (start->next == zone) {
 		start->next = zone->next;
-		munmap(zone, zone->size);
+		if (munmap(zone, zone->size) == -1)
+			print_errno();
 	}
 }
 
