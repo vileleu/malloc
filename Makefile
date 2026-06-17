@@ -6,7 +6,7 @@
 #    By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 13:36:31 by vileleu           #+#    #+#              #
-#    Updated: 2026/06/17 16:04:03 by vileleu          ###   ########.fr        #
+#    Updated: 2026/06/17 21:55:31 by vileleu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,10 +73,6 @@ test:
 			@$(CC) $(CFLAGS) main.c $(INCS) $(LIBFT) -L. -lmalloc -o test && \
 			LD_LIBRARY_PATH=. ./test ; $(RM) test
 
-install:
-			@sudo apt update
-			@sudo apt upgrade
-
 clean:
 			@printf "$(BLUE)Clean libraries ...$(RESET)\n"
 			@$(MAKE) -C $(DIR_LIBFT) clean
@@ -96,4 +92,4 @@ fclean:
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re test
