@@ -6,7 +6,7 @@
 #    By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 13:36:31 by vileleu           #+#    #+#              #
-#    Updated: 2026/06/17 21:55:31 by vileleu          ###   ########.fr        #
+#    Updated: 2026/06/17 22:15:54 by vileleu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ INCS		= -I$(DIR_INCS) -I$(DIR_INCS_LIBFT)
 OBJS 		= $(patsubst %.c,$(DIR_OBJS)/%.o,$(SRCS))
 DEPS 		= $(patsubst $(DIR_OBJS)/%.o,$(DIR_DEPS)/%.d,$(OBJS))
 
-NAME 		= libmalloc_$(HOSTTYPE).so
-LINK	 	= libmalloc.so
+NAME 		= libft_malloc_$(HOSTTYPE).so
+LINK	 	= libft_malloc.so
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -pthread
 OFLAGS		= -fPIC -MMD -MP -MF $(patsubst $(DIR_OBJS)/%.o,$(DIR_DEPS)/%.d,$@)
@@ -70,7 +70,7 @@ $(NAME):	$(OBJS)
 -include	$(DEPS)
 
 test:
-			@$(CC) $(CFLAGS) main.c $(INCS) $(LIBFT) -L. -lmalloc -o test && \
+			@$(CC) $(CFLAGS) test.c $(INCS) $(LIBFT) -L. -lft_malloc -o test && \
 			LD_LIBRARY_PATH=. ./test ; $(RM) test
 
 clean:
