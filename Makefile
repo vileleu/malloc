@@ -6,7 +6,7 @@
 #    By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 13:36:31 by vileleu           #+#    #+#              #
-#    Updated: 2026/06/15 16:46:10 by vileleu          ###   ########.fr        #
+#    Updated: 2026/06/17 02:37:35 by vileleu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ DEPS 		= $(patsubst $(DIR_OBJS)/%.o,$(DIR_DEPS)/%.d,$(OBJS))
 NAME 		= libmalloc_$(HOSTTYPE).so
 LINK	 	= libmalloc.so
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -lpthread
+CFLAGS		= -Wall -Wextra -Werror -pthread
 OFLAGS		= -fPIC -MMD -MP -MF $(patsubst $(DIR_OBJS)/%.o,$(DIR_DEPS)/%.d,$@)
 RM			= rm -rf
 
@@ -63,15 +63,15 @@ $(DIR_OBJS)/%.o: $(DIR_SRCS)/%.c | $(LIBFT)
 
 $(NAME):	$(OBJS)
 			@printf "\n$(BLUE)Compiling $(NAME) ... $(RESET)"
-			@$(CC) -shared $(OBJS) $(LIBFT) -o $(NAME)
+			@$(CC) -shared -pthread $(OBJS) $(LIBFT) -o $(NAME)
 			@ln -sf $(NAME) $(LINK)
 			@printf "$(GREEN)[✔]\n[$(NAME) done]$(RESET)\n"
 
 -include	$(DEPS)
 
 test:
-			@$(CC) main.c $(INCS) -L. -lmalloc -o test && LD_LIBRARY_PATH=. ./test
-			@$(RM) test
+			@$(CC) $(CFLAGS) test.c $(INCS) -L. -lmalloc -o test && \
+			LD_LIBRARY_PATH=. ./test ; $(RM) test
 
 install:
 			@sudo apt update
