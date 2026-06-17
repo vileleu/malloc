@@ -6,7 +6,7 @@
 #    By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 13:36:31 by vileleu           #+#    #+#              #
-#    Updated: 2026/06/17 02:37:35 by vileleu          ###   ########.fr        #
+#    Updated: 2026/06/17 16:04:03 by vileleu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,7 @@ $(NAME):	$(OBJS)
 -include	$(DEPS)
 
 test:
-			@$(CC) $(CFLAGS) test.c $(INCS) -L. -lmalloc -o test && \
+			@$(CC) $(CFLAGS) main.c $(INCS) $(LIBFT) -L. -lmalloc -o test && \
 			LD_LIBRARY_PATH=. ./test ; $(RM) test
 
 install:

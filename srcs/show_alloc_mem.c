@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:34:32 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/15 15:47:42 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/17 16:45:56 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	show_alloc_mem() {
         init_heap();
 	t_zone		*zone = NULL;
 	t_zone_type	type = TINY;
+	size_t		bytes = 0;
 	while (type < 3) {
 		zone = g_heap.zones[type];
 		if (zone) {
@@ -47,7 +48,9 @@ void	show_alloc_mem() {
 					ft_putstr(" : ");
 					ft_putsize_fd(block->size, 1);
 					ft_putstr(" bytes\n");
+					bytes += block->size;
 				}
+				/*
 				else {
 					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE));
 					ft_putstr(" - ");
@@ -56,10 +59,14 @@ void	show_alloc_mem() {
 					ft_putsize_fd(block->size, 1);
 					ft_putstr(" bytes (free space)\n");
 				}
+				*/
 				block = block->next;
 			}
 			zone = zone->next;
 		}
 		type++;
 	}
+	ft_putstr("Total : ");
+	ft_putsize_fd(bytes, 1);
+	ft_putstr(" bytes\n");
 }
