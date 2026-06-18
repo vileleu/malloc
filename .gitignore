@@ -2,6 +2,7 @@
 objects
 dependencies
 compile_commands.json
+test
 *.o
 *.d
 *.so
