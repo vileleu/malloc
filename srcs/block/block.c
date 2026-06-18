@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 19:12:34 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/15 16:24:32 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 05:43:18 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,25 +87,23 @@ t_zone	*join_block(t_block *block) {
 	// both block side are free
 	if (prev && prev->free == TRUE && next && next->free == TRUE) {
 		prev->next = next->next;
-		prev->size = prev->size + block->size + HEADER_BLOCK_SIZE + next->size + HEADER_BLOCK_SIZE;
-		ft_bzero(block, HEADER_BLOCK_SIZE);
-		ft_bzero(next, HEADER_BLOCK_SIZE);
+		prev->size += block->size + HEADER_BLOCK_SIZE + next->size + HEADER_BLOCK_SIZE;
+		if (next->next)
+			next->next->prev = prev;
 	}
 	// only prev is free
 	else if (prev && prev->free == TRUE) {
 		prev->next = next;
-		prev->size = prev->size + block->size + HEADER_BLOCK_SIZE;
+		prev->size += block->size + HEADER_BLOCK_SIZE;
 		if (next)
 			next->prev = prev;
-		ft_bzero(block, HEADER_BLOCK_SIZE);
 	}
 	// only next is free
 	else if (next && next->free == TRUE) {
 		block->next = next->next;
-		block->size = block->size + next->size + HEADER_BLOCK_SIZE;
+		block->size += next->size + HEADER_BLOCK_SIZE;
 		if (next->next)
 			next->next->prev = block;
-		ft_bzero(next, HEADER_BLOCK_SIZE);
 	}
 	return zone;
 }

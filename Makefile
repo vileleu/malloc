@@ -6,7 +6,7 @@
 #    By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/17 13:36:31 by vileleu           #+#    #+#              #
-#    Updated: 2026/06/17 22:15:54 by vileleu          ###   ########.fr        #
+#    Updated: 2026/06/18 05:46:33 by vileleu          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ $(NAME):	$(OBJS)
 
 test:
 			@$(CC) $(CFLAGS) test.c $(INCS) $(LIBFT) -L. -lft_malloc -o test && \
-			LD_LIBRARY_PATH=. ./test ; $(RM) test
+			LD_LIBRARY_PATH=. ./test
 
 clean:
 			@printf "$(BLUE)Clean libraries ...$(RESET)\n"

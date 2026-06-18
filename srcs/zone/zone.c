@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:46:13 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/15 17:01:24 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 05:44:29 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,19 @@ t_zone	*create_zone(t_zone_type type, size_t size) {
 }
 
 void	delete_zone(t_zone *zone) {
+	if (!zone) return;
 	t_zone_type	type = zone->type;
-	t_zone		*start = g_heap.zones[type];
-	if (start == zone) {
-		g_heap.zones[type] = start->next;
+	t_zone		*tmp = g_heap.zones[type];
+	if (tmp == zone) {
+		g_heap.zones[type] = tmp->next;
+		if (munmap(zone, zone->size) == -1)
+			print_errno();
 		return;
 	}
-	while (start->next && start->next != zone)
-		start = start->next;
-	if (start->next == zone) {
-		start->next = zone->next;
+	while (tmp->next && tmp->next != zone)
+		tmp = tmp->next;
+	if (tmp->next == zone) {
+		tmp->next = zone->next;
 		if (munmap(zone, zone->size) == -1)
 			print_errno();
 	}
@@ -79,13 +82,11 @@ t_zone_type	get_zone_type(size_t size) {
 }
 
 t_bool	zone_is_free(t_zone *zone) {
-	// crash ici
 	t_block	*start = zone->blocks;
-	t_bool	free = TRUE;
 	while (start) {
 		if (start->free == FALSE)
-			free = FALSE;
+			return FALSE;
 		start = start->next;
 	}
-	return free;
+	return TRUE;
 }
