@@ -31,11 +31,11 @@ void	*_realloc(void *ptr, size_t size) {
     }
     // new size is bigger
     else {
+        size_t  copy_size = old_block->size <= size ? old_block->size : size;
         void    *new_ptr = _malloc(size);
         if (new_ptr == NULL)
             return NULL;
         // save data
-        size_t  copy_size = old_block->size <= size ? old_block->size : size;
         ft_memcpy(new_ptr, ptr, copy_size);
         _free(ptr);
         return new_ptr;

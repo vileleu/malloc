@@ -71,7 +71,7 @@ typedef struct	s_heap {
     size_t  page_size;
 }				t_heap;
 
-t_heap					g_heap;
+extern t_heap			g_heap;
 extern pthread_mutex_t	g_mutex;
 
 #define HEADER_ZONE_SIZE ALIGN(sizeof(t_zone))

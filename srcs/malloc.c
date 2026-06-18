@@ -12,6 +12,7 @@
 
 #include "malloc.h"
 
+t_heap			g_heap;
 pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void    *_malloc(size_t size) {

@@ -136,7 +136,7 @@ static void *routine_malloc(void *arg) {
             (*errors) = 1;
             continue;
         }
-        ft_memset(p, 0xAB, 64);
+        ft_memset(p, 2, 64);
         free(p);
     }
     return NULL;
@@ -150,7 +150,7 @@ static void *routine_realloc(void *arg) {
             (*errors) = 1;
             continue;
         }
-        ft_memset(p, 0xCD, 32);
+        ft_memset(p, 4, 32);
         void *r = realloc(p, 128);
         if (!r) {
             free(p);
@@ -158,8 +158,8 @@ static void *routine_realloc(void *arg) {
             continue;
         }
         for (int k = 0; k < 32; k++) {
-            if (((unsigned char *)r)[k] != 0xCD) {
-                (*errors)++;
+            if (((unsigned char *)r)[k] != 4) {
+                (*errors) = 1;
                 break;
             }
         }
