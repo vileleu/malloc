@@ -1,13 +1,13 @@
-gcc -o test0 tests/malloc/test0.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test0
-gcc -o test1 tests/malloc/test1.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test1
-gcc -o test2 tests/malloc/test2.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test2
-gcc -o test3 tests/malloc/test3.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test3
-gcc -o test4 tests/malloc/test4.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test4
-gcc -o test5 tests/malloc/test5.c && sh tests/malloc/run_linux.sh /usr/bin/time -v ./test5
+gcc -o test0 ./tests_malloc/test0.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test0
+gcc -o test1 ./tests_malloc/test1.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test1
+gcc -o test2 ./tests_malloc/test2.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test2
+gcc -o test3 ./tests_malloc/test3.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test3
+gcc -o test4 ./tests_malloc/test4.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test4
+gcc -o test5 ./tests_malloc/test5.c && sh ./tests_malloc/run_linux.sh /usr/bin/time -v ./test5
 
-gcc -o test0 tests/malloc/test0.c && /usr/bin/time -v ./test0
-gcc -o test1 tests/malloc/test1.c && /usr/bin/time -v ./test1
-gcc -o test2 tests/malloc/test2.c && /usr/bin/time -v ./test2
-gcc -o test3 tests/malloc/test3.c && /usr/bin/time -v ./test3
-gcc -o test4 tests/malloc/test4.c && /usr/bin/time -v ./test4
-gcc -o test5 tests/malloc/test5.c && /usr/bin/time -v ./test5
+gcc -o test0 ./tests_malloc/test0.c && /usr/bin/time -v ./test0
+gcc -o test1 ./tests_malloc/test1.c && /usr/bin/time -v ./test1
+gcc -o test2 ./tests_malloc/test2.c && /usr/bin/time -v ./test2
+gcc -o test3 ./tests_malloc/test3.c && /usr/bin/time -v ./test3
+gcc -o test4 ./tests_malloc/test4.c && /usr/bin/time -v ./test4
+gcc -o test5 ./tests_malloc/test5.c && /usr/bin/time -v ./test5
