@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 23:01:41 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 07:03:59 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 17:18:12 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	*_realloc(void *ptr, size_t size) {
         _free(ptr);
         return NULL;
 	}
+    size = ALIGN(size);
     t_block *old_block = get_block_from_ptr(ptr);
     if (size == old_block->size)
         return ptr;
@@ -31,7 +32,7 @@ void	*_realloc(void *ptr, size_t size) {
     }
     // new size is bigger
     else {
-        size_t  copy_size = old_block->size <= size ? old_block->size : size;
+        size_t  copy_size = old_block->size;
         void    *new_ptr = _malloc(size);
         if (new_ptr == NULL)
             return NULL;

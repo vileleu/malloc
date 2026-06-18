@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:38:12 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/17 22:16:11 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 15:39:56 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,37 @@
 
 static int g_passed = 0;
 static int g_failed = 0;
+
+void	ft_putnbr(int n, int fd) {
+	if (n == -2147483648) {
+		ft_putstr_fd("-2147483648", fd);
+		return ;
+	}
+	if (n < 0) {
+		ft_putchar('-');
+		n = -n;
+	}
+	if (n >= 0 && n <= 9) {
+		n = n + 48;
+		ft_putchar(n);
+	}
+	else {
+		ft_putnbr(n / 10, fd);
+		ft_putnbr(n % 10, fd);
+	}
+}
+
+void	*ft_memset(void *b, int c, size_t len) {
+	unsigned long	i;
+	char			*ptr;
+	i = 0;
+	ptr = b;
+	while (i < len)	{
+		ptr[i] = c;
+		i++;
+	}
+	return (b);
+}
  
 static void check(t_bool cond, char *msg) {
     if (cond) {
@@ -196,9 +227,9 @@ int main(void) {
 
     ft_putstr("\n═══════════════════════════════════════\n");
     ft_putstr("  Result : ");
-    ft_putnbr_fd(g_passed, 1);
+    ft_putnbr(g_passed, 1);
     ft_putstr(" ✓  / ");
-    ft_putnbr_fd(g_failed, 1);
+    ft_putnbr(g_failed, 1);
     ft_putstr(" ✗\n");
     ft_putstr("═══════════════════════════════════════\n");
     return (g_failed > 0 ? 1 : 0);

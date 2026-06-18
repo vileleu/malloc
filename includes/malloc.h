@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:58:54 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 06:59:10 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 16:10:32 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 #include <string.h>
 #include <sys/mman.h>
 #include <unistd.h>
-
-#include "libft.h"
 
 #define DEBUGG(msg) ft_putstr("\n[DEBUGG] "); ft_putstr(msg); ft_putstr("\n");
 
@@ -120,7 +118,21 @@ void	init_heap();
 */
 
 void	print_hex(unsigned long p);
+void	_show_alloc_mem();
 void	show_alloc_mem();
+
+
+/*
+** UTILS FUNCTIONS
+*/
+
+void	ft_putchar(char c);
+size_t	ft_strlen(const char *s);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putstr(char *s);
+void	ft_putsize(size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 /*
 ** ERROR FUNCTIONS

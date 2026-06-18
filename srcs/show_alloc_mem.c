@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:34:32 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/17 16:45:56 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 16:10:50 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	print_hex(unsigned long p) {
 	ft_putstr(buf);
 }
 
-void	show_alloc_mem() {
+void	_show_alloc_mem() {
 	if (!g_heap.page_size)
         init_heap();
 	t_zone		*zone = NULL;
@@ -36,7 +36,7 @@ void	show_alloc_mem() {
 		if (zone) {
 			ft_putstr(type == TINY ? "TINY : " : (type == SMALL ? "SMALL : " : "LARGE : "));
 			print_hex((unsigned long)((char *)zone));
-			ft_putchar_fd('\n', 1);
+			ft_putstr("\n");
 		}
 		while (zone) {
 			t_block	*block = zone->blocks;
@@ -46,7 +46,7 @@ void	show_alloc_mem() {
 					ft_putstr(" - ");
 					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->size));
 					ft_putstr(" : ");
-					ft_putsize_fd(block->size, 1);
+					ft_putsize(block->size);
 					ft_putstr(" bytes\n");
 					bytes += block->size;
 				}
@@ -56,7 +56,7 @@ void	show_alloc_mem() {
 					ft_putstr(" - ");
 					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->size));
 					ft_putstr(" : ");
-					ft_putsize_fd(block->size, 1);
+					ft_putsize(block->size);
 					ft_putstr(" bytes (free space)\n");
 				}
 				*/
@@ -67,6 +67,12 @@ void	show_alloc_mem() {
 		type++;
 	}
 	ft_putstr("Total : ");
-	ft_putsize_fd(bytes, 1);
+	ft_putsize(bytes);
 	ft_putstr(" bytes\n");
+}
+
+void	show_alloc_mem() {
+	pthread_mutex_lock(&g_mutex);
+	_show_alloc_mem();
+	pthread_mutex_unlock(&g_mutex);
 }
