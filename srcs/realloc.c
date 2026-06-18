@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 23:01:41 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 05:46:07 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 07:03:59 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*_realloc(void *ptr, size_t size) {
         init_heap();
 	if (ptr == NULL)
 		return _malloc(size);
-    else if (size == 0) {
+    else if (size == 0 || size > SIZE_MAX - HEADER_ZONE_SIZE - HEADER_BLOCK_SIZE - (g_heap.page_size - 1)) {
         _free(ptr);
         return NULL;
 	}

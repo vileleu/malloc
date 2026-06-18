@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 22:57:43 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/17 22:15:04 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/18 07:03:44 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ pthread_mutex_t g_mutex = PTHREAD_MUTEX_INITIALIZER;
 void    *_malloc(size_t size) {
 	if (!g_heap.page_size)
         init_heap();
-    if (size == 0)
+    if (size == 0 || size > SIZE_MAX - HEADER_ZONE_SIZE - HEADER_BLOCK_SIZE - (g_heap.page_size - 1))
         return NULL;
     size = ALIGN(size);
     t_block     *block = get_or_create_block(size);
