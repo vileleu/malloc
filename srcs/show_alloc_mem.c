@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 23:34:32 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 16:10:50 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:22:40 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,19 @@ void	_show_alloc_mem() {
 				if (!block->free) {
 					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE));
 					ft_putstr(" - ");
-					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->size));
+					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->requested_size));
 					ft_putstr(" : ");
-					ft_putsize(block->size);
+					ft_putsize(block->requested_size);
 					ft_putstr(" bytes\n");
-					bytes += block->size;
+					bytes += block->requested_size;
 				}
 				/*
 				else {
 					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE));
 					ft_putstr(" - ");
-					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->size));
+					print_hex((unsigned long)((char *)block + HEADER_BLOCK_SIZE + block->requested_size));
 					ft_putstr(" : ");
-					ft_putsize(block->size);
+					ft_putsize(block->requested_size);
 					ft_putstr(" bytes (free space)\n");
 				}
 				*/

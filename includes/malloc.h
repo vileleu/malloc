@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:58:54 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/20 17:25:48 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:25:31 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-#define N 128
-#define M 1024
+#define TINY_MAX 128
+#define SMALL_MAX 1024
 #define PREALLOCATION 100
-#define ALIGN_MAX 16
+#define ALIGN_MAX sizeof(size_t) * 2
 
 #define ALIGN(n) (((n) + (ALIGN_MAX) - 1) & ~((ALIGN_MAX) - 1))
 #define ALIGN_PAGE(n) (((n) + g_heap.page_size - 1) & ~(g_heap.page_size - 1))
@@ -53,6 +53,7 @@ typedef struct	s_block {
 	struct s_block	*prev;
 	struct s_block	*next;
 	size_t			size;
+	size_t			requested_size;
 	t_bool			free;
 }				t_block;
 

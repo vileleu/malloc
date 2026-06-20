@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:46:13 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/20 17:31:35 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:15:23 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_zone	*create_zone(t_zone_type type, size_t size) {
 	first_block->next = NULL;
 	first_block->free = TRUE;
 	first_block->size = size - HEADER_ZONE_SIZE - HEADER_BLOCK_SIZE;
+	first_block->requested_size = size - HEADER_ZONE_SIZE - HEADER_BLOCK_SIZE;
 	zone->blocks = first_block;
 	return (zone);
 }

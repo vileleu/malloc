@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 19:12:34 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/20 18:07:21 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:20:52 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_block	*get_or_create_block(size_t size) {
 
 void	split_block(t_block *block, size_t size) {
 	// no split if not enough space in the remaining block (need ALIGN_MAX bytes at least)
+	size_t	requested_size = size;
+	size = ALIGN(size);
 	block->free = FALSE;
 	if (block->size - size < HEADER_BLOCK_SIZE + ALIGN_MAX) return;
 	t_block *new_block = (t_block *)((char *)block + HEADER_BLOCK_SIZE + size);
@@ -55,11 +57,13 @@ void	split_block(t_block *block, size_t size) {
 	new_block->prev = block;
 	new_block->next = block->next;
 	new_block->size = block->size - size - HEADER_BLOCK_SIZE;
+	new_block->requested_size = new_block->size;
 	new_block->free = TRUE;
 	if (block->next)
     	block->next->prev = new_block;
 	block->next = new_block;
 	block->size = size;
+	block->requested_size = requested_size;
 }
 
 /*
@@ -87,6 +91,7 @@ t_zone	*join_block(t_block *block) {
 	if (prev && prev->free == TRUE && next && next->free == TRUE) {
 		prev->next = next->next;
 		prev->size += block->size + HEADER_BLOCK_SIZE + next->size + HEADER_BLOCK_SIZE;
+		prev->requested_size = prev->size;
 		if (next->next)
 			next->next->prev = prev;
 	}
@@ -94,6 +99,7 @@ t_zone	*join_block(t_block *block) {
 	else if (prev && prev->free == TRUE) {
 		prev->next = next;
 		prev->size += block->size + HEADER_BLOCK_SIZE;
+		prev->requested_size = prev->size;
 		if (next)
 			next->prev = prev;
 	}
@@ -101,6 +107,7 @@ t_zone	*join_block(t_block *block) {
 	else if (next && next->free == TRUE) {
 		block->next = next->next;
 		block->size += next->size + HEADER_BLOCK_SIZE;
+		block->requested_size = block->size;
 		if (next->next)
 			next->next->prev = block;
 	}
