@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 14:46:13 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 16:54:10 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 17:31:35 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,23 @@ t_zone_type	get_zone_type(size_t size) {
 	return LARGE;
 }
 
-t_bool	zone_is_free(t_zone *zone) {
-	t_block	*start = zone->blocks;
-	while (start) {
-		if (start->free == FALSE)
-			return FALSE;
-		start = start->next;
-	}
-	return TRUE;
+t_bool	zone_is_empty(t_zone *zone) {
+    t_block	*block = zone->blocks;
+    while (block) {
+        if (block->free == FALSE)
+            return FALSE;
+        block = block->next;
+    }
+    return TRUE;
+}
+
+int	count_empty_zones(t_zone *zones) {
+    int		count = 0;
+    t_zone	*tmp = zones;
+    while (tmp) {
+        if (zone_is_empty(tmp))
+            count++;
+        tmp = tmp->next;
+    }
+    return count;
 }

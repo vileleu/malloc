@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 19:12:34 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 17:13:58 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 18:07:21 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_block	*get_or_create_block(size_t size) {
 
 void	split_block(t_block *block, size_t size) {
 	// no split if not enough space in the remaining block (need ALIGN_MAX bytes at least)
+	block->free = FALSE;
 	if (block->size - size < HEADER_BLOCK_SIZE + ALIGN_MAX) return;
 	t_block *new_block = (t_block *)((char *)block + HEADER_BLOCK_SIZE + size);
 	new_block->parent = block->parent;
@@ -59,7 +60,6 @@ void	split_block(t_block *block, size_t size) {
     	block->next->prev = new_block;
 	block->next = new_block;
 	block->size = size;
-	block->free = FALSE;
 }
 
 /*

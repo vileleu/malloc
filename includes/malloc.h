@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/07 22:58:54 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 16:10:32 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 17:25:48 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,8 @@ t_zone		*create_zone(t_zone_type type, size_t size);
 void		delete_zone(t_zone *zone);
 void		add_zone(t_zone_type type, t_zone *zone);
 t_zone_type	get_zone_type(size_t size);
-t_bool		zone_is_free(t_zone *zone);
+t_bool		zone_is_empty(t_zone *zone);
+int			count_empty_zones(t_zone *zones);
 
 /*
 ** HEAP FUNCTIONS

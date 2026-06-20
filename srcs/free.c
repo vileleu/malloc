@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 23:01:15 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 17:04:19 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 17:31:09 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	_free(void *ptr) {
     }
 	block->free = TRUE;
 	t_zone	*zone = join_block(block);
-	if (zone_is_free(zone))
+	if (zone_is_empty(zone) && count_empty_zones(g_heap.zones[zone->type]) > 1)
 		delete_zone(zone);
 }
 

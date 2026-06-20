@@ -13,7 +13,7 @@ int     main(void)
     char  *addr;
 
     i = 0;
-    while (i < 1024) 
+    while (i < 1) 
     {
         addr = (char*)malloc(1024);
         if (addr == NULL)

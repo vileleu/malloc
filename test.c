@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:38:12 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 15:39:56 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 18:10:31 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include "malloc.h"
 
-#define SHOW_MEM_ALLOC 0
+#define SHOW_MEM_ALLOC 1
 #define NB_THREADS 4
 #define NB_ITER 500
 
@@ -194,6 +194,7 @@ static void *routine_realloc(void *arg) {
                 break;
             }
         }
+        //show_alloc_mem();
         free(r);
     }
     return NULL;
