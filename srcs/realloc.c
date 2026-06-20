@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 23:01:41 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/18 17:18:12 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/20 21:39:08 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,27 @@ void	*_realloc(void *ptr, size_t size) {
         _free(ptr);
         return NULL;
 	}
-    size = ALIGN(size);
     t_block *old_block = get_block_from_ptr(ptr);
-    if (size == old_block->size)
+    if (old_block == NULL) {
+        print_error("invalid pointer");
+        return NULL;
+    }
+    if (size == old_block->requested_size)
         return ptr;
     // new size is smaller
-    if (size < old_block->size) {
+    if (size < old_block->requested_size) {
         split_block(old_block, size);
         return ptr;
     }
     // new size is bigger
+    else if (ALIGN(size) <= old_block->size) {
+        old_block->requested_size = size;
+        return ptr;
+    }
+    // new size is bigger (need more space)
     else {
-        size_t  copy_size = old_block->size;
-        void    *new_ptr = _malloc(size);
+        size_t  copy_size = old_block->requested_size;
+        void    *new_ptr = _malloc(ALIGN(size));
         if (new_ptr == NULL)
             return NULL;
         // save data
