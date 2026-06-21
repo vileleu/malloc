@@ -6,7 +6,7 @@
 /*   By: vileleu <vileleu@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/07 23:01:41 by vileleu           #+#    #+#             */
-/*   Updated: 2026/06/20 21:39:08 by vileleu          ###   ########.fr       */
+/*   Updated: 2026/06/21 02:21:22 by vileleu          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	*_realloc(void *ptr, size_t size) {
         split_block(old_block, size);
         return ptr;
     }
-    // new size is bigger
+    // new size is bigger (block have space)
     else if (ALIGN(size) <= old_block->size) {
         old_block->requested_size = size;
         return ptr;
     }
-    // new size is bigger (need more space)
+    // new size is bigger (block need more space)
     else {
         size_t  copy_size = old_block->requested_size;
         void    *new_ptr = _malloc(ALIGN(size));
